@@ -7,10 +7,31 @@ let server = http.createServer((req, res) => {
         handlePublic(url, req, res);
     }
     else {
-        let html = fs.readFileSync("./index.html");
-        res.setHeader("Content-type", "text/html");
-        res.statusCode = 200;
-        res.end(html);
+        if (req.url === '/' && req.method === "GET") {
+            let html = fs.readFileSync("./views/index.html");
+            res.setHeader("Content-type", "text/html");
+            res.statusCode = 200;
+            res.end(html);
+        }
+        else if (req.url === '/driversPage.html' && req.method === "GET") {
+            let html = fs.readFileSync("./views/driversPage.html");
+            res.setHeader("Content-type", "text/html");
+            res.statusCode = 200;
+            res.end(html);
+        }
+        else if (req.url === '/constructorsPage.html' && req.method === "GET") {
+            let html = fs.readFileSync("./views/constructorsPage.html");
+            res.setHeader("Content-type", "text/html");
+            res.statusCode = 200;
+            res.end(html);
+        }
+        else {
+            res.writeHead(404, {
+                "content-type": "text/plain"
+            });
+            res.end("Page Not Found!")
+        }
+        
     }
 })
 
