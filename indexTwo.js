@@ -8,11 +8,11 @@ app.get('/', (req,res) => {
     res.render('index')
 });
 
-app.get('/constructorsPage.html', (req, res) => {
+app.get('/constructorsPage', (req, res) => {
     res.render('constructorsPage')
 })
 
-app.get('/driversPage.html', (req, res) => {
+app.get('/driversPage', (req, res) => {
     res.render('driversPage')
 })
 
