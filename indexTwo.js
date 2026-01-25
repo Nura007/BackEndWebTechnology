@@ -4,6 +4,9 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const fs = require('fs').promises;
 const { Pool } = require('pg');
+const path = require('path');
+console.log('Current directory:', __dirname);
+console.log('Looking for .env at:', path.join(__dirname, '.env'));
 
 // Load environment variables from .env file
 require('dotenv').config();
