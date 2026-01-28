@@ -105,35 +105,46 @@
     </div>
 
     <script>
-        async function loadConstructors() {
-            const res = await fetch('/api/constructors');
-            const constructors = await res.json();
-            
-            const tbody = document.getElementById('constructorsBody');
-            tbody.innerHTML = ''; // clear table
+    async function loadConstructors() {
+        try {
+        const res = await fetch('/api/constructors');
 
-            constructors.forEach(c => {
-                const tr = document.createElement('tr');
-
-                tr.innerHTML = `
-                    <td>${c.position}</td>
-                    <td class="team-cell">
-                        <div class="team-info">
-                            <div class="team-color" style="background-color: ${c.color};"></div>
-                            <span>${c.team}</span>
-                        </div>
-                    </td>
-                    <td>${c.drivers}</td>
-                    <td class="points">${c.points}</td>
-                    <td>${c.wins}</td>
-                    <td>${c.podiums}</td>
-                `;
-                tbody.appendChild(tr);
-            });
+        if (!res.ok) {
+            throw new Error(`HTTP error ${res.status}`);
         }
 
-        window.onload = loadConstructors;
+        const result = await res.json();     // result = { count, data }
+        const constructors = result.data || []; // constructors = массив
+
+        const tbody = document.getElementById('constructorsBody');
+        tbody.innerHTML = ''; // clear table
+
+        constructors.forEach(c => {
+            const tr = document.createElement('tr');
+
+            tr.innerHTML = `
+            <td>${c.position ?? ''}</td>
+            <td class="team-cell">
+                <div class="team-info">
+                <div class="team-color" style="background-color: ${c.color || '#999'};"></div>
+                <span>${c.team ?? ''}</span>
+                </div>
+            </td>
+            <td>${c.drivers ?? ''}</td>
+            <td class="points">${c.points ?? 0}</td>
+            <td>${c.wins ?? 0}</td>
+            <td>${c.podiums ?? 0}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+        } catch (err) {
+        console.error('Failed to load constructors:', err);
+        }
+    }
+
+    window.onload = loadConstructors;
     </script>
+
 
 </body>
 </html>
