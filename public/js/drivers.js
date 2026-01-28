@@ -3,14 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     const response = await fetch('/api/drivers');
-
-    if (!response.ok) {
-      throw new Error(`HTTP error ${response.status}`);
-    }
-
-    const result = await response.json();
-
-    const drivers = Array.isArray(result) ? result : [];
+    const drivers = await response.json();
 
     tbody.innerHTML = '';
 
@@ -22,32 +15,21 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         <td class="driver-cell">
           <div class="driver-info">
-            <img src="${driver.image_url || '/img/default-driver.png'}"
-               class="driver-avatar"
-               alt="${driver.name}">
+            <img src="${driver.image_url}" class="driver-avatar">
             <span>${driver.name}</span>
           </div>
         </td>
 
         <td>${driver.team}</td>
-        <td class="points">${driver.points ?? 0}</td>
-        <td>${driver.wins ?? 0}</td>
-        <td>${driver.podiums ?? 0}</td>
-        <td>${driver.starts ?? '-'}</td>
+        <td class="points">${driver.points}</td>
+        <td>${driver.wins}</td>
+        <td>${driver.poles}</td>
+        <td>${driver.starts}</td>
       `;
 
       tbody.appendChild(row);
     });
-
   } catch (err) {
     console.error('Failed to load drivers:', err);
-
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="7" style="text-align:center; color:red;">
-          Drivers data is unavailable
-        </td>
-      </tr>
-    `;
   }
 });
