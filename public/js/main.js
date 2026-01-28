@@ -21,7 +21,7 @@ form.addEventListener('submit', async(e) => {
     errMessage.innerText = ""
 
     try {
-        const res = await fetch("http://localhost:3000/send-data", {
+        const res = await fetch("/send-data", {
             method: "POST",
             headers: {"Content-type": "application/json"},
             body: JSON.stringify({
