@@ -1,4 +1,4 @@
-const API = 'http://localhost:3000/api/drivers';
+const API = '/api/drivers';
 
 // SHOW
 async function getDrivers() {
