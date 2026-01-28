@@ -17,10 +17,10 @@ console.log('MongoDB URI:', process.env.MONGODB_URI ? 'Set' : 'Not set');
 
 // ================= PostgreSQL =================
 const pgPool = new Pool({
-  user: process.env.PG_USER || 'postgres',
-  host: process.env.PG_HOST || 'localhost',
-  database: process.env.PG_DATABASE || 'f1_database',
-  password: process.env.PG_PASSWORD || 'nura2007',
+  user: process.env.PG_USER || 'f1_postgres_user',
+  host: process.env.PG_HOST || 'dpg-d5t106koud1c73akjp6g-a.f1_postgreslhost',
+  database: process.env.PG_DATABASE || 'f1_postgres',
+  password: process.env.PG_PASSWORD || 'g0xq7hha25xpyGWdFvJGnJTIbWyyiwDW',
   port: process.env.PG_PORT ? Number(process.env.PG_PORT) : 5432,
 });
 
